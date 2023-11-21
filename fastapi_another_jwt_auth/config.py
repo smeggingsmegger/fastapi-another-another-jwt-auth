@@ -86,10 +86,4 @@ class LoadConfig(BaseModel):
             raise ValueError("The 'authjwt_cookie_samesite' must be between 'strict', 'lax', 'none'")
         return v
 
-    @validator('authjwt_csrf_methods', each_item=True)
-    def validate_csrf_methods(cls, v):
-        if v.upper() not in {"GET", "HEAD", "POST", "PUT", "DELETE", "PATCH"}:
-            raise ValueError("The 'authjwt_csrf_methods' must be between http request methods")
-        return v.upper()
-
     model_config = ConfigDict(str_min_length=1, str_strip_whitespace=True)
